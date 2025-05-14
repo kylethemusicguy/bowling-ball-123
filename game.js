@@ -46,15 +46,19 @@ function update() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
 
-    // Bounce logic that follows current aim
+    // bounce off left/right
     if (ballX - ballRadius < 0 || ballX + ballRadius > canvas.width) {
-      updateBallVelocity(); // use current angle for bounce
-    }
-    if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
-      updateBallVelocity(); // use current angle for bounce
+      angle = 180 - angle;
+      updateBallVelocity();
     }
 
-    // Pin collisions
+    // bounce off top/bottom
+    if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+      angle = -angle;
+      updateBallVelocity();
+    }
+
+    // pin collisions
     pins.forEach((pin, index) => {
       const dist = Math.hypot(ballX - pin.x, ballY - pin.y);
       if (dist < ballRadius + 10) {
