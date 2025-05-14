@@ -6,7 +6,7 @@ const scoreText = document.getElementById('score');
 let score = 0;
 let isBowling = false;
 let ballX = 100;
-let ballY = 350;
+let ballY = 100;  // Set ball to the same height as the top pin
 let ballSpeedX = 0;
 let ballSpeedY = 0;
 let power = 5;
@@ -34,6 +34,8 @@ document.addEventListener('keydown', (e) => {
     power = 5; // reset power
   } else if (e.key === 'r') {
     resetGame(); // reset the game when "r" is pressed
+  } else if (e.key === 'k') {
+    resetBall(); // reset ball position when "k" is pressed
   }
 });
 
@@ -74,7 +76,7 @@ function update() {
 
 function resetBall() {
   ballX = 100;
-  ballY = 350;
+  ballY = 100;  // Ball resets to the height of the first pin (y = 100)
   ballSpeedX = 0;
   ballSpeedY = 0;
   isBowling = false;
