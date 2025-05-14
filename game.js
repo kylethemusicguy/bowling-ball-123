@@ -42,8 +42,13 @@ function update() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
 
-    if (ballX < 0 || ballX > canvas.width || ballY < 0 || ballY > canvas.height) {
-      resetBall();
+    // Ball bounce off walls (left, right, top, bottom)
+    if (ballX - ballRadius < 0 || ballX + ballRadius > canvas.width) {
+      ballSpeedX = -ballSpeedX; // reverse horizontal speed
+    }
+
+    if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+      ballSpeedY = -ballSpeedY; // reverse vertical speed
     }
 
     // Collision with pins
