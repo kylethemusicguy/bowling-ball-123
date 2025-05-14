@@ -12,10 +12,13 @@ let ballSpeedY = 0;
 let power = 5;
 let angle = 0;
 
-const pins = [];
-for (let i = 0; i < 10; i++) {
-  pins.push({ x: 650 + (i % 4) * 30, y: 350 - Math.floor(i / 4) * 30 });
-}
+// Full 10-pin bowling formation
+let pins = [
+  { x: 650, y: 100 },  // row 1 (1 pin)
+  { x: 620, y: 130 }, { x: 680, y: 130 },  // row 2 (2 pins)
+  { x: 590, y: 160 }, { x: 650, y: 160 }, { x: 710, y: 160 },  // row 3 (3 pins)
+  { x: 560, y: 190 }, { x: 620, y: 190 }, { x: 680, y: 190 }, { x: 740, y: 190 }  // row 4 (4 pins)
+];
 
 const ballRadius = 10;
 
@@ -29,6 +32,8 @@ document.addEventListener('keydown', (e) => {
     ballSpeedX = Math.cos(angle * Math.PI / 180) * power;
     ballSpeedY = Math.sin(angle * Math.PI / 180) * power;
     power = 5; // reset power
+  } else if (e.key === 'r') {
+    resetGame(); // reset the game when "r" is pressed
   }
 });
 
@@ -69,6 +74,17 @@ function resetBall() {
   ballSpeedY = 0;
   isBowling = false;
   power = 5;
+}
+
+function resetGame() {
+  score = 0; // reset score
+  pins = [
+    { x: 650, y: 100 },  // row 1 (1 pin)
+    { x: 620, y: 130 }, { x: 680, y: 130 },  // row 2 (2 pins)
+    { x: 590, y: 160 }, { x: 650, y: 160 }, { x: 710, y: 160 },  // row 3 (3 pins)
+    { x: 560, y: 190 }, { x: 620, y: 190 }, { x: 680, y: 190 }, { x: 740, y: 190 }  // row 4 (4 pins)
+  ]; // reset pins
+  resetBall(); // reset ball
 }
 
 function draw() {
